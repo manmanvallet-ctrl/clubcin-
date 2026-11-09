@@ -196,7 +196,7 @@ Source : questionnaire « Questions de cadrage – Outil pédagogique cinéma »
 
 ### Maquette révisée
 
-La maquette suit désormais ce périmètre : bibliothèque d'ateliers, carnet de création en six étapes (idée, cadre et personnages, scénario, storyboard avec croquis au doigt, tournage, film), vue des carnets pour l'enseignant. Précisions apportées par l'enseignant : aucun support papier aujourd'hui, le storyboard se fait au tableau avec les élèves et le scénario s'écrit ensemble avant d'être mis en page en ligne. Le carnet est donc pensé pour être rempli à plusieurs, projeté ou sur téléphone.
+La maquette suit désormais ce périmètre : bibliothèque d'ateliers, carnet de création en six étapes (idée, cadre et personnages, scénario, storyboard photographié au tableau puis listé plan par plan, tournage, film), vue des carnets pour l'enseignant. Précisions apportées par l'enseignant : aucun support papier aujourd'hui, le storyboard se fait au tableau avec les élèves et le scénario s'écrit ensemble avant d'être mis en page en ligne. Le carnet est donc pensé pour être rempli à plusieurs, projeté ou sur téléphone.
 
 Le schéma `supabase/` date d'avant ce recentrage : sa table `projects` et ses étapes fixes sont à remplacer par les ateliers et les carnets avant tout branchement.
 

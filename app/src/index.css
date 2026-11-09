@@ -179,3 +179,13 @@ textarea::placeholder, input::placeholder { color: var(--muted); opacity: 0.6; }
 .subnav a { color: var(--muted); text-decoration: none; padding: 5px 10px; border-radius: 99px; white-space: nowrap; font-size: 0.92rem; }
 .subnav a.active { color: var(--text); box-shadow: inset 0 0 0 1px var(--line); background: var(--surface); }
 ul.plain li span { min-width: 0; }
+
+.photos { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.photos li { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-width: 0; }
+.photos li.grande { grid-column: 1 / -1; }
+.photo { padding: 0; border-radius: 8px; overflow: hidden; width: 100%; cursor: zoom-in; }
+.grande .photo { cursor: zoom-out; }
+.photo img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.grande .photo img { aspect-ratio: auto; object-fit: contain; }
+label.upload { align-self: flex-start; cursor: pointer; background: var(--accent-fill); border-color: var(--accent-fill); color: var(--accent-ink); font-weight: 600; border: 1px solid var(--accent-fill); border-radius: 8px; padding: 7px 12px; }
+label.upload:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }

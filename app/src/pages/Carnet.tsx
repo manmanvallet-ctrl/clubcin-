@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type PointerEvent } from 'react'
+import { useEffect, useRef, useState, type ChangeEvent, type PointerEvent } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import {
   ANGLES, ATELIERS, ECHELLES, ETAPES, MOUVEMENTS, REGISTRES, newPlan, youtubeUrl, type Carnet, type Plan,
@@ -67,12 +67,84 @@ function Croquis({ value, onChange, label }: { value?: string; onChange: (v: str
         onPointerUp={end}
         onPointerCancel={end}
       />
-      {!value && <span className="croquis-hint">Dessiner le cadre ici</span>}
+      {!value && <span className="croquis-hint">Croquis (facultatif)</span>}
       {value && (
         <button className="link" onClick={clear}>
           Effacer
         </button>
       )}
+    </div>
+  )
+}
+
+const MAX_PHOTOS = 4
+
+// Réduit la photo avant de la garder : un téléphone produit des images de plusieurs mégaoctets.
+function reduire(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file)
+    const img = new Image()
+    img.onload = () => {
+      const k = Math.min(1, 1280 / Math.max(img.width, img.height))
+      const c = document.createElement('canvas')
+      c.width = Math.round(img.width * k)
+      c.height = Math.round(img.height * k)
+      c.getContext('2d')?.drawImage(img, 0, 0, c.width, c.height)
+      URL.revokeObjectURL(url)
+      resolve(c.toDataURL('image/jpeg', 0.7))
+    }
+    img.onerror = () => {
+      URL.revokeObjectURL(url)
+      reject(new Error('image illisible'))
+    }
+    img.src = url
+  })
+}
+
+// Le storyboard se fait au tableau : on le photographie plutôt que de le redessiner.
+function PhotosTableau({ photos, onChange }: { photos: string[]; onChange: (p: string[]) => void }) {
+  const [erreur, setErreur] = useState('')
+  const [grande, setGrande] = useState<number | null>(null)
+  const reste = MAX_PHOTOS - photos.length
+
+  const ajouter = async (e: ChangeEvent<HTMLInputElement>) => {
+    const files = [...(e.target.files ?? [])].slice(0, reste)
+    e.target.value = ''
+    setErreur('')
+    try {
+      onChange([...photos, ...(await Promise.all(files.map(reduire)))])
+    } catch {
+      setErreur('Cette image n’a pas pu être lue. Essayez avec une photo au format JPEG ou PNG.')
+    }
+  }
+
+  return (
+    <div className="field">
+      <span>Photos du tableau</span>
+      {photos.length > 0 && (
+        <ul className="photos">
+          {photos.map((src, i) => (
+            <li key={i} className={grande === i ? 'grande' : ''}>
+              <button className="photo" onClick={() => setGrande(grande === i ? null : i)} aria-label={`${grande === i ? 'Réduire' : 'Agrandir'} la photo ${i + 1}`}>
+                <img src={src} alt={`Photo du tableau ${i + 1}`} />
+              </button>
+              <button className="link" onClick={() => { setGrande(null); onChange(photos.filter((_, j) => j !== i)) }}>
+                Retirer
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+      {reste > 0 ? (
+        <label className="button upload">
+          {photos.length ? 'Ajouter une photo' : 'Photographier le tableau'}
+          <input id="photos-tableau" className="sr" type="file" accept="image/*" capture="environment" multiple onChange={ajouter} />
+        </label>
+      ) : (
+        <small>{MAX_PHOTOS} photos au maximum. Retirez-en une pour en ajouter.</small>
+      )}
+      {erreur && <small className="ko">{erreur}</small>}
+      <small>Cadrez le tableau seul : pas de visages d’élèves sur la photo.</small>
     </div>
   )
 }
@@ -213,7 +285,14 @@ export function CarnetPage() {
         {etape === 'storyboard' && (
           <>
             <h2>Storyboard</h2>
-            <p className="muted">Un cadre par plan : ce qu’on voit, comment c’est filmé, ce qu’on entend.</p>
+            <p className="muted">
+              Photographiez le storyboard fait au tableau, puis listez les plans pour préparer le tournage. Le croquis de
+              chaque plan est facultatif.
+            </p>
+            <PhotosTableau photos={carnet.photos ?? []} onChange={(photos) => set({ photos })} />
+            <div className="field">
+              <span>Liste des plans</span>
+            </div>
             <ol className="plans">
               {carnet.plans.map((p, i) => (
                 <li key={p.id} className="plan">

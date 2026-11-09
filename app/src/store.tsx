@@ -24,7 +24,7 @@ interface Store extends State {
   me: Progress
 }
 
-const KEY = 'clubcine-proto-v2'
+const KEY = 'clubcine-proto-v3'
 const initial = (): State => ({ session: null, level: 1, progress: seedProgress(), carnets: seedCarnets() })
 
 function load(): State {

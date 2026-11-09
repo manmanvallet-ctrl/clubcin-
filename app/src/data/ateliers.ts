@@ -29,6 +29,7 @@ export interface Carnet {
   lieu: string
   personnages: string
   scenario: string
+  photos: string[] // photos du tableau, réduites et encodées
   plans: Plan[]
   roles: string
   lien: string
@@ -131,7 +132,7 @@ export const MOUVEMENTS: Option[] = [
 export const REGISTRES = ['Suspense', 'Comique', 'Dramatique', 'Romantique', 'Fantastique', 'Réaliste']
 
 export const emptyCarnet = (): Carnet => ({
-  idee: '', registre: '', lieu: '', personnages: '', scenario: '', plans: [], roles: '', lien: '', bilan: '',
+  idee: '', registre: '', lieu: '', personnages: '', scenario: '', photos: [], plans: [], roles: '', lien: '', bilan: '',
 })
 
 export const newPlan = (): Plan => ({
@@ -143,7 +144,7 @@ export const ETAPES: { id: string; label: string; done: (c: Carnet) => boolean }
   { id: 'idee', label: 'Idée', done: (c) => c.idee.trim() !== '' },
   { id: 'cadre', label: 'Cadre et personnages', done: (c) => c.lieu.trim() !== '' && c.personnages.trim() !== '' },
   { id: 'scenario', label: 'Scénario', done: (c) => c.scenario.trim() !== '' },
-  { id: 'storyboard', label: 'Storyboard', done: (c) => c.plans.length > 0 && c.plans.every((p) => p.action.trim() !== '') },
+  { id: 'storyboard', label: 'Storyboard', done: (c) => c.photos.length > 0 || (c.plans.length > 0 && c.plans.every((p) => p.action.trim() !== '')) },
   { id: 'tournage', label: 'Tournage', done: (c) => c.plans.length > 0 && c.plans.every((p) => p.tourne) },
   { id: 'film', label: 'Film', done: (c) => youtubeUrl(c.lien) !== null },
 ]
@@ -172,6 +173,7 @@ export const seedCarnets = (): Record<string, Carnet> => ({
     personnages: 'Inès, élève concentrée, qui refuse d’abord de lever la tête.\nMalo, son voisin, le premier à se lever.\nLa surveillante, qu’on entend sans la voir.',
     scenario:
       'INT. SALLE DE CLASSE — JOUR\n\nSilence. Des stylos grattent le papier.\n\nUn FRACAS dans le couloir. Tout le monde se fige.\n\nMALO\n(à voix basse)\nT’as entendu ?\n\nINÈS\nNon.\n\nMalo se lève, va jusqu’à la porte, regarde. Son visage change.\n\nLA SURVEILLANTE (off)\nPersonne ne sort !\n\nInès finit par lever les yeux vers la porte.',
+    photos: [],
     plans: [
       { id: 'a1', echelle: 'Plan d’ensemble', angle: 'À hauteur', mouvement: 'Fixe', action: 'La classe en plein contrôle, la porte entrouverte au fond.', son: 'Stylos, horloge.', tourne: true },
       { id: 'a2', echelle: 'Gros plan', angle: 'Plongée', mouvement: 'Fixe', action: 'La main d’Inès qui écrit, puis s’arrête net.', son: 'Fracas hors champ.', tourne: true },
