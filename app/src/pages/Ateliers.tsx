@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { ATELIERS, ETAPES, avancement, carnetId, type Atelier, type Carnet } from '../data/ateliers'
 import { TERMS } from '../data/content'
 import { GROUPS, STUDENTS } from '../data/demo'
+import { Illustrations } from '../components/Illustrations'
 import { useStore } from '../store'
 
 function useMyGroup() {
@@ -137,6 +138,7 @@ function AtelierCard({ atelier }: { atelier: Atelier }) {
           </ul>
         </>
       )}
+      <Illustrations cle={`atelier:${atelier.id}`} />
       <h3>Notions travaillées</h3>
       <div className="notions">
         {notions.map((t) => (

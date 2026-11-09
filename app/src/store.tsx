@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from '
 import type { Level } from './data/content'
 import { carnetId, emptyCarnet, seedCarnets, type Carnet } from './data/ateliers'
 import { emptyProgress, seedProgress, type Progress } from './data/demo'
+import { seedMedias, type Media } from './data/medias'
 
 // Prototype : tout l'état vit dans le navigateur (localStorage), sans serveur.
 export type Session = { role: 'eleve'; studentId: string } | { role: 'enseignant' } | null
@@ -11,6 +12,7 @@ interface State {
   level: Level
   progress: Record<string, Progress>
   carnets: Record<string, Carnet> // clé : atelier--groupe
+  medias: Record<string, Media[]> // clé : type:identifiant du contenu
 }
 
 interface Store extends State {
@@ -20,12 +22,14 @@ interface Store extends State {
   saveQuiz: (level: Level, score: number) => void
   lancer: (atelierId: string, groupId: string) => string
   updateCarnet: (id: string, patch: Partial<Carnet>) => void
+  addMedia: (key: string, media: Omit<Media, 'id'>) => void
+  removeMedia: (key: string, id: string) => void
   reset: () => void
   me: Progress
 }
 
-const KEY = 'clubcine-proto-v3'
-const initial = (): State => ({ session: null, level: 1, progress: seedProgress(), carnets: seedCarnets() })
+const KEY = 'clubcine-proto-v4'
+const initial = (): State => ({ session: null, level: 1, progress: seedProgress(), carnets: seedCarnets(), medias: seedMedias() })
 
 function load(): State {
   try {
@@ -73,6 +77,13 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     },
     updateCarnet: (id, patch) =>
       setState((s) => ({ ...s, carnets: { ...s.carnets, [id]: { ...(s.carnets[id] ?? emptyCarnet()), ...patch } } })),
+    addMedia: (key, media) =>
+      setState((s) => ({
+        ...s,
+        medias: { ...s.medias, [key]: [...(s.medias[key] ?? []), { ...media, id: Math.random().toString(36).slice(2, 9) }] },
+      })),
+    removeMedia: (key, id) =>
+      setState((s) => ({ ...s, medias: { ...s.medias, [key]: (s.medias[key] ?? []).filter((m) => m.id !== id) } })),
     reset: () => setState(initial()),
   }
   return <Ctx.Provider value={store}>{children}</Ctx.Provider>

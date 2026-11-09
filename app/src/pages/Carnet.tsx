@@ -4,6 +4,7 @@ import {
   ANGLES, ATELIERS, ECHELLES, ETAPES, MOUVEMENTS, REGISTRES, newPlan, youtubeUrl, type Carnet, type Plan,
 } from '../data/ateliers'
 import { GROUPS, STUDENTS } from '../data/demo'
+import { reduire } from '../lib/image'
 import { useStore } from '../store'
 
 // Croquis au doigt ou à la souris, comme au tableau. Trait clair sur fond sombre.
@@ -79,28 +80,6 @@ function Croquis({ value, onChange, label }: { value?: string; onChange: (v: str
 
 const MAX_PHOTOS = 4
 
-// Réduit la photo avant de la garder : un téléphone produit des images de plusieurs mégaoctets.
-function reduire(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const url = URL.createObjectURL(file)
-    const img = new Image()
-    img.onload = () => {
-      const k = Math.min(1, 1280 / Math.max(img.width, img.height))
-      const c = document.createElement('canvas')
-      c.width = Math.round(img.width * k)
-      c.height = Math.round(img.height * k)
-      c.getContext('2d')?.drawImage(img, 0, 0, c.width, c.height)
-      URL.revokeObjectURL(url)
-      resolve(c.toDataURL('image/jpeg', 0.7))
-    }
-    img.onerror = () => {
-      URL.revokeObjectURL(url)
-      reject(new Error('image illisible'))
-    }
-    img.src = url
-  })
-}
-
 // Le storyboard se fait au tableau : on le photographie plutôt que de le redessiner.
 function PhotosTableau({ photos, onChange }: { photos: string[]; onChange: (p: string[]) => void }) {
   const [erreur, setErreur] = useState('')
@@ -112,7 +91,7 @@ function PhotosTableau({ photos, onChange }: { photos: string[]; onChange: (p: s
     e.target.value = ''
     setErreur('')
     try {
-      onChange([...photos, ...(await Promise.all(files.map(reduire)))])
+      onChange([...photos, ...(await Promise.all(files.map((f) => reduire(f))))])
     } catch {
       setErreur('Cette image n’a pas pu être lue. Essayez avec une photo au format JPEG ou PNG.')
     }

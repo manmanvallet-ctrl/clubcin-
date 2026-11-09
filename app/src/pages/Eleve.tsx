@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { DIRECTORS, LEVELS, PERIODS, QUESTIONS, TERMS, type Level } from '../data/content'
 import type { Progress } from '../data/demo'
+import { Illustrations } from '../components/Illustrations'
 import { useStore } from '../store'
 
 export const pct = (done: number, total: number) => (total ? Math.round((done / total) * 100) : 0)
@@ -122,6 +123,7 @@ export function Histoire() {
                       <li key={f}>{f}</li>
                     ))}
                   </ul>
+                  <Illustrations cle={`period:${p.id}`} />
                   <DoneButton done={read} onClick={() => toggle('periods', p.id)} labels={['Marquer comme lu', 'Lu']} />
                 </div>
               )}
@@ -170,6 +172,7 @@ export function Vocabulaire() {
             <h2>{t.term}</h2>
             <p>{t.definition}</p>
             {t.example && <p className="muted">Exemple : {t.example}</p>}
+            <Illustrations cle={`term:${t.id}`} recherche={`${t.term} cinéma exemple`} />
             <DoneButton done={me.terms.includes(t.id)} onClick={() => toggle('terms', t.id)} labels={['Je maîtrise', 'Maîtrisé']} />
           </article>
         ))}
@@ -207,6 +210,7 @@ export function Realisateurs() {
             </div>
             <h3>À voir</h3>
             <p>{d.films.join(' · ')}</p>
+            <Illustrations cle={`director:${d.id}`} recherche={`${d.name} extrait`} />
             <DoneButton done={me.directors.includes(d.id)} onClick={() => toggle('directors', d.id)} labels={['Marquer comme lue', 'Fiche lue']} />
           </article>
         ))}
