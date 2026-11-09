@@ -24,11 +24,12 @@ interface Store extends State {
   updateCarnet: (id: string, patch: Partial<Carnet>) => void
   addMedia: (key: string, media: Omit<Media, 'id'>) => void
   removeMedia: (key: string, id: string) => void
+  validerMedia: (key: string, id: string) => void
   reset: () => void
   me: Progress
 }
 
-const KEY = 'clubcine-proto-v4'
+const KEY = 'clubcine-proto-v5'
 const initial = (): State => ({ session: null, level: 1, progress: seedProgress(), carnets: seedCarnets(), medias: seedMedias() })
 
 function load(): State {
@@ -81,6 +82,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       setState((s) => ({
         ...s,
         medias: { ...s.medias, [key]: [...(s.medias[key] ?? []), { ...media, id: Math.random().toString(36).slice(2, 9) }] },
+      })),
+    validerMedia: (key, id) =>
+      setState((s) => ({
+        ...s,
+        medias: { ...s.medias, [key]: (s.medias[key] ?? []).map((m) => (m.id === id ? { ...m, status: 'valide' } : m)) },
       })),
     removeMedia: (key, id) =>
       setState((s) => ({ ...s, medias: { ...s.medias, [key]: (s.medias[key] ?? []).filter((m) => m.id !== id) } })),

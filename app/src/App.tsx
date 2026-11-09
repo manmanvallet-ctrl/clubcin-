@@ -6,6 +6,7 @@ import { AccueilEleve, Ateliers, Carnets } from './pages/Ateliers'
 import { CarnetPage } from './pages/Carnet'
 import { CultureAccueil, Histoire, Quiz, Realisateurs, Vocabulaire } from './pages/Eleve'
 import { Suivi } from './pages/Enseignant'
+import { Propositions, enAttente } from './pages/Propositions'
 
 function Login() {
   const { login, reset } = useStore()
@@ -85,11 +86,12 @@ function Culture() {
 }
 
 export default function App() {
-  const { session, login } = useStore()
+  const { session, login, medias } = useStore()
   const navigate = useNavigate()
   if (!session) return <Login />
 
   const eleve = session.role === 'eleve'
+  const attente = enAttente(medias).length
   const name = eleve ? STUDENTS.find((s) => s.id === session.studentId)?.name : 'Enseignant'
   const links = eleve
     ? [
@@ -101,6 +103,7 @@ export default function App() {
         ['/', 'Ateliers'],
         ['/carnets', 'Carnets'],
         ['/culture', 'Culture ciné'],
+        ['/propositions', 'Propositions'],
         ['/suivi', 'Suivi'],
       ]
 
@@ -112,6 +115,7 @@ export default function App() {
           {links.map(([to, label]) => (
             <NavLink key={to} to={to} end={to === '/'}>
               {label}
+              {to === '/propositions' && attente > 0 && <span className="badge">{attente}</span>}
             </NavLink>
           ))}
         </nav>
@@ -141,6 +145,7 @@ export default function App() {
             <Route path="realisateurs" element={<Realisateurs />} />
             <Route path="quiz" element={eleve ? <Quiz /> : <Navigate to="/culture/histoire" replace />} />
           </Route>
+          <Route path="/propositions" element={eleve ? <Navigate to="/" /> : <Propositions />} />
           <Route path="/suivi" element={eleve ? <Navigate to="/" /> : <Suivi />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

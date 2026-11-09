@@ -7,6 +7,8 @@ export interface Media {
   title: string
   url?: string // lien https
   src?: string // image encodée
+  status: 'valide' | 'propose' // une proposition d'élève reste invisible des autres tant qu'elle n'est pas validée
+  by?: string // identifiant de l'élève qui propose
 }
 
 // N'accepte que des liens https : pas de javascript:, data: ni http en clair.
@@ -48,10 +50,23 @@ const upopi: Record<string, [string, string]> = {
   'contre-jour': ['6#definition-6-1', 'Lumière'],
 }
 
-export const seedMedias = (): Record<string, Media[]> =>
-  Object.fromEntries(
+export function seedMedias(): Record<string, Media[]> {
+  const medias: Record<string, Media[]> = Object.fromEntries(
     Object.entries(upopi).map(([id, [path, title]]) => [
       `term:${id}`,
-      [{ id: `upopi-${id}`, kind: 'lien' as const, title: `Cours Upopi : ${title}`, url: UPOPI + path }],
+      [{ id: `upopi-${id}`, kind: 'lien', title: `Cours Upopi : ${title}`, url: UPOPI + path, status: 'valide' } satisfies Media],
     ]),
   )
+  // Exemples de propositions d'élèves en attente, pour la démonstration.
+  medias['term:travelling'].push({
+    id: 'demo-p1', kind: 'lien', status: 'propose', by: 's2',
+    title: 'Les couloirs de l’hôtel dans Shining',
+    url: rechercheYoutube('Shining travelling couloir tricycle'),
+  })
+  medias['director:varda'] = [{
+    id: 'demo-p2', kind: 'lien', status: 'propose', by: 's8',
+    title: 'Varda filme sa main dans Les Glaneurs et la Glaneuse',
+    url: rechercheYoutube('Les Glaneurs et la Glaneuse Varda main camion'),
+  }]
+  return medias
+}
