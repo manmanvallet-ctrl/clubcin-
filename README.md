@@ -4,6 +4,7 @@ Interface pédagogique pour l'option cinéma-audiovisuel au lycée : histoire du
 
 - [`docs/discovery.md`](docs/discovery.md) — cadrage : utilisateurs, périmètre du MVP, risques, questions ouvertes.
 - [`app/`](app) — prototype navigable (React, TypeScript, Vite).
+- [`supabase/`](supabase) — schéma de la base, règles d'accès et corpus de départ pour le MVP.
 
 ## Lancer le prototype
 

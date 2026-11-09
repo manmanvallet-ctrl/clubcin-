@@ -122,7 +122,7 @@ Corpus de départ dans le prototype : 8 périodes, 26 notions, 12 cinéastes, 13
 
 **Prototype (fait).** React, TypeScript, Vite. Aucune base de données : contenus dans le code, progression dans le navigateur. Suffisant pour une démonstration, pas pour une classe réelle, puisque rien n'est partagé entre appareils.
 
-**MVP (recommandation).** Garder le front, ajouter Supabase (base Postgres, authentification, règles d'accès par ligne, région UE) : pas de serveur à maintenir, et les droits élève / enseignant / groupe s'expriment directement dans la base. Contenus déplacés en base avec un statut de validation.
+**MVP (décidé).** Garder le front, ajouter Supabase (base Postgres, authentification, règles d'accès par ligne, région UE) : pas de serveur à maintenir, et les droits élève / enseignant / groupe s'expriment directement dans la base. Contenus déplacés en base avec un statut de validation. Le schéma et les règles d'accès sont dans [`supabase/`](../supabase/README.md) ; le branchement du front reste à faire.
 
 ## 11. Étapes
 
