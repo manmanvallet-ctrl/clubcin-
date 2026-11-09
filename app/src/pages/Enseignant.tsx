@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { LEVELS } from '../data/content'
-import { GROUPS, PROJECTS, STEPS, STUDENTS, emptyProgress } from '../data/demo'
+import { ATELIERS, ETAPES, avancement } from '../data/ateliers'
+import { GROUPS, STUDENTS, emptyProgress } from '../data/demo'
 import { useStore } from '../store'
 import { Bar, pct, summary } from './Eleve'
 
 export function Suivi() {
-  const { progress, steps } = useStore()
+  const { progress, carnets } = useStore()
   const [group, setGroup] = useState('tous')
   const rows = STUDENTS.filter((s) => group === 'tous' || s.groupId === group).map((s) => {
     const p = progress[s.id] ?? emptyProgress()
@@ -17,8 +18,8 @@ export function Suivi() {
 
   return (
     <>
-      <h1>Suivi de la classe</h1>
-      <p className="lead">Progression individuelle par rubrique et avancement des projets de groupe.</p>
+      <h1>Suivi du club</h1>
+      <p className="lead">Progression de chacun en culture ciné et avancement des carnets. Un repère, pas une note.</p>
       <div className="grid three">
         <section className="card">
           <h2>Progression moyenne</h2>
@@ -31,23 +32,29 @@ export function Suivi() {
           <p className="muted">{late.length ? late.map((r) => r.s.name).join(', ') : 'Personne sous 30 %.'}</p>
         </section>
         <section className="card">
-          <h2>Projets</h2>
+          <h2>Carnets</h2>
           <ul className="plain">
-            {PROJECTS.map((p) => (
-              <li key={p.id}>
-                <span>{p.title}</span>
-                <strong>
-                  {(steps[p.id] ?? []).length}/{STEPS.length}
-                </strong>
-              </li>
-            ))}
+            {Object.entries(carnets).map(([id, c]) => {
+              const [atelierId, groupId] = id.split('--')
+              return (
+                <li key={id}>
+                  <span>
+                    {ATELIERS.find((a) => a.id === atelierId)?.title}
+                    <span className="muted"> · {GROUPS.find((g) => g.id === groupId)?.name.replace('Groupe ', '')}</span>
+                  </span>
+                  <strong>
+                    {avancement(c)}/{ETAPES.length}
+                  </strong>
+                </li>
+              )
+            })}
           </ul>
         </section>
       </div>
 
       <div className="chips">
         <button className={group === 'tous' ? 'active' : ''} onClick={() => setGroup('tous')}>
-          Toute la classe
+          Tout le club
         </button>
         {GROUPS.map((g) => (
           <button key={g.id} className={group === g.id ? 'active' : ''} onClick={() => setGroup(g.id)}>

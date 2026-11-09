@@ -194,9 +194,14 @@ Source : questionnaire « Questions de cadrage – Outil pédagogique cinéma »
 | 3 | Culture ciné | Frise, cinéastes, quiz : conservés, au second plan. |
 | Plus tard | Option et bac | Œuvres au programme, dossier, oral ; suivi de progression détaillé. |
 
+### Maquette révisée
+
+La maquette suit désormais ce périmètre : bibliothèque d'ateliers, carnet de création en six étapes (idée, cadre et personnages, scénario, storyboard avec croquis au doigt, tournage, film), vue des carnets pour l'enseignant. Précisions apportées par l'enseignant : aucun support papier aujourd'hui, le storyboard se fait au tableau avec les élèves et le scénario s'écrit ensemble avant d'être mis en page en ligne. Le carnet est donc pensé pour être rempli à plusieurs, projeté ou sur téléphone.
+
+Le schéma `supabase/` date d'avant ce recentrage : sa table `projects` et ses étapes fixes sont à remplacer par les ateliers et les carnets avant tout branchement.
+
 ### Questions encore ouvertes
 
-- Quels supports papier utilise-t-il aujourd'hui pour le storyboard et le scénario ? Les voir éviterait d'inventer un format.
 - Les élèves écrivent-ils à plusieurs sur le même document pendant la séance ?
 - Le club compte-t-il des élèves de plusieurs niveaux ?
 - La direction est-elle déjà au courant du projet ?

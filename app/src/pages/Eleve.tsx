@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { DIRECTORS, LEVELS, PERIODS, QUESTIONS, TERMS, type Level } from '../data/content'
-import { STUDENTS, type Progress } from '../data/demo'
+import type { Progress } from '../data/demo'
 import { useStore } from '../store'
 
 export const pct = (done: number, total: number) => (total ? Math.round((done / total) * 100) : 0)
@@ -36,19 +36,18 @@ function DoneButton({ done, onClick, labels }: { done: boolean; onClick: () => v
   )
 }
 
-export function Accueil() {
-  const { me, session, level } = useStore()
-  const student = STUDENTS.find((s) => session?.role === 'eleve' && s.id === session.studentId)
+export function CultureAccueil() {
+  const { me, level } = useStore()
   const s = summary(me)
   const nextPeriod = PERIODS.find((p) => p.level <= level && !me.periods.includes(p.id))
   const tiles: [string, string, number, string][] = [
-    ['/histoire', 'Histoire du cinéma', s.histoire, `${me.periods.length}/${PERIODS.length} périodes lues`],
-    ['/vocabulaire', 'Vocabulaire', s.vocabulaire, `${me.terms.length}/${TERMS.length} notions maîtrisées`],
-    ['/realisateurs', 'Réalisateurs', s.realisateurs, `${me.directors.length}/${DIRECTORS.length} fiches lues`],
+    ['/culture/histoire', 'Histoire du cinéma', s.histoire, `${me.periods.length}/${PERIODS.length} périodes lues`],
+    ['/culture/vocabulaire', 'Vocabulaire', s.vocabulaire, `${me.terms.length}/${TERMS.length} notions maîtrisées`],
+    ['/culture/realisateurs', 'Réalisateurs', s.realisateurs, `${me.directors.length}/${DIRECTORS.length} fiches lues`],
   ]
   return (
     <>
-      <h1>Bonjour {student?.name}</h1>
+      <h1>Culture ciné</h1>
       <p className="lead">Niveau en cours : {LEVELS[level - 1].label}. Voici où tu en es.</p>
       <div className="grid three">
         {tiles.map(([to, title, value, detail]) => (
@@ -65,13 +64,13 @@ export function Accueil() {
           <h2>À faire ensuite</h2>
           {nextPeriod ? (
             <p>
-              Lire la période <Link to="/histoire">« {nextPeriod.title} »</Link> ({nextPeriod.years}).
+              Lire la période <Link to="/culture/histoire">« {nextPeriod.title} »</Link> ({nextPeriod.years}).
             </p>
           ) : (
             <p>Toutes les périodes de ton niveau sont lues. Passe au niveau suivant ou tente le quiz.</p>
           )}
           <p>
-            <Link to="/quiz">Lancer un quiz</Link> · <Link to="/projets">Voir le projet du groupe</Link>
+            <Link to="/culture/quiz">Lancer un quiz</Link>
           </p>
         </section>
         <section className="card">
@@ -252,7 +251,7 @@ export function Quiz() {
       <h1>Quiz · {LEVELS[level - 1].label}</h1>
       <p className="lead">
         Meilleur score : {me.quiz[level] !== undefined ? `${me.quiz[level]} %` : 'pas encore tenté'}. Change de niveau
-        dans le menu en haut.
+        avec le sélecteur ci-dessus.
       </p>
       {finished ? (
         <section className="card quiz">

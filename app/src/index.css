@@ -42,7 +42,7 @@ a { color: var(--accent); }
 .brand { margin-right: auto; }
 @media (min-width: 900px) { .brand { margin-right: 0; } }
 
-button, select, input[type='search'] { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; }
+button, select, input, textarea, a.button { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; }
 button { cursor: pointer; }
 button:hover:not(:disabled) { border-color: var(--accent); }
 button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -112,3 +112,70 @@ tbody tr:last-child th, tbody tr:last-child td { border-bottom: none; }
 
 body::before { content: ''; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
 .who select { max-width: 11rem; }
+
+/* ── Ateliers et carnet de création ── */
+a.button { display: inline-block; text-decoration: none; }
+a.button:hover { border-color: var(--accent); }
+.block { margin-bottom: 20px; }
+.atelier ul { margin: 0 0 4px; padding-left: 20px; }
+.notions { display: flex; flex-wrap: wrap; gap: 8px; }
+.notions details { border: 1px solid var(--line); border-radius: 10px; padding: 5px 12px; font-size: 0.9rem; max-width: 100%; }
+.notions summary { cursor: pointer; }
+.notions details p { margin: 6px 0 4px; color: var(--muted); max-width: 46ch; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+
+.etapes { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 10px 0; }
+.etapes li { font-size: 0.75rem; padding: 2px 9px; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); }
+.etapes li.ok { background: var(--accent-fill); border-color: var(--accent-fill); color: var(--accent-ink); }
+
+.consigne { margin: 0 0 18px; color: var(--muted); max-width: 70ch; }
+.consigne summary { cursor: pointer; color: var(--accent); }
+.consigne ul { margin: 6px 0; padding-left: 20px; }
+
+.stepper { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 12px; }
+.stepper button { display: flex; align-items: center; gap: 8px; white-space: nowrap; border-radius: 99px; color: var(--muted); }
+.stepper .num { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line); font-size: 0.75rem; font-variant-numeric: tabular-nums; }
+.stepper button.ok .num { background: var(--accent-fill); border-color: var(--accent-fill); color: var(--accent-ink); }
+.stepper button.active { color: var(--text); border-color: var(--accent); }
+
+.sheet { display: flex; flex-direction: column; gap: 14px; }
+.sheet > h2 { font-size: 1.5rem; margin: 0; }
+.sheet > p { margin: 0; max-width: 65ch; }
+.field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.field > span:first-child { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.field small { color: var(--muted); font-size: 0.82rem; min-height: 2.6em; }
+.field small.ko { color: var(--ko); min-height: 0; }
+.field .chips { margin: 0; }
+textarea, input[type='url'] { width: 100%; background: var(--bg); resize: vertical; line-height: 1.5; }
+textarea.mono { font-family: 'Courier New', Courier, monospace; font-size: 0.95rem; }
+textarea::placeholder, input::placeholder { color: var(--muted); opacity: 0.6; }
+.field select { width: 100%; background: var(--bg); }
+
+.plans { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+.plan { border: 1px solid var(--line); border-radius: 12px; padding: 12px; background: var(--bg); }
+.plan-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.plan-head button:disabled { opacity: 0.3; cursor: default; }
+.plan-body { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 14px; }
+.plan-fields { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.plan-fields textarea, .plan-fields select { background: var(--surface); }
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 720px) {
+  .plan-body { grid-template-columns: minmax(0, 1fr); }
+  .trio { grid-template-columns: minmax(0, 1fr); }
+  .field small { min-height: 0; }
+}
+.croquis { position: relative; align-self: start; }
+.croquis canvas { display: block; width: 100%; aspect-ratio: 16 / 9; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; touch-action: none; cursor: crosshair; }
+.croquis-hint { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); opacity: 0.6; font-size: 0.85rem; pointer-events: none; }
+.croquis .link { position: absolute; right: 4px; bottom: 4px; font-size: 0.8rem; }
+
+.steps label { align-items: flex-start; }
+.steps input { flex: none; margin-top: 3px; }
+.pager { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 0.85rem; }
+.pager button:disabled { opacity: 0.35; cursor: default; }
+
+.subnav { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 22px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.subnav nav { display: flex; gap: 4px; overflow-x: auto; min-width: 0; }
+.subnav a { color: var(--muted); text-decoration: none; padding: 5px 10px; border-radius: 99px; white-space: nowrap; font-size: 0.92rem; }
+.subnav a.active { color: var(--text); box-shadow: inset 0 0 0 1px var(--line); background: var(--surface); }
+ul.plain li span { min-width: 0; }

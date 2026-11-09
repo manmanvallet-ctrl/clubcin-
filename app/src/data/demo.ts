@@ -1,11 +1,8 @@
-// Données de démonstration : élèves, groupes et projets fictifs.
+// Données de démonstration : élèves et groupes fictifs du club.
 import { DIRECTORS, PERIODS, TERMS, type Level } from './content'
 
 export interface Student { id: string; name: string; classe: string; groupId: string }
 export interface Group { id: string; name: string }
-export interface Step { id: string; label: string }
-export interface Project { id: string; title: string; groupId: string; kind: string; pitch: string; due: string }
-
 export interface Progress {
   periods: string[]
   terms: string[]
@@ -31,21 +28,6 @@ export const STUDENTS: Student[] = [
   { id: 's9', name: 'Tom', classe: '1re', groupId: 'g3' },
 ]
 
-export const STEPS: Step[] = [
-  { id: 'note', label: "Note d'intention" },
-  { id: 'scenario', label: 'Scénario' },
-  { id: 'decoupage', label: 'Découpage / storyboard' },
-  { id: 'tournage', label: 'Tournage' },
-  { id: 'montage', label: 'Montage' },
-  { id: 'projection', label: 'Projection et bilan' },
-]
-
-export const PROJECTS: Project[] = [
-  { id: 'p1', title: 'La Sortie du lycée', groupId: 'g1', kind: 'Exercice « vue Lumière »', pitch: 'Un plan fixe d’une minute, sans coupe, qui raconte la fin d’une journée.', due: '2026-12-18' },
-  { id: 'p2', title: 'Le Casier n° 13', groupId: 'g2', kind: 'Court métrage de fiction', pitch: 'Un casier que personne n’ouvre intrigue toute la classe. Travail sur le hors-champ et le suspense.', due: '2027-02-12' },
-  { id: 'p3', title: 'Ceux qui restent', groupId: 'g3', kind: 'Documentaire', pitch: 'Portraits des agents du lycée après la sonnerie, à la manière des Glaneurs.', due: '2027-02-12' },
-]
-
 export const emptyProgress = (): Progress => ({ periods: [], terms: [], directors: [], quiz: {} })
 
 // Progression simulée et stable pour les élèves de démonstration.
@@ -62,9 +44,3 @@ function seeded(i: number): Progress {
 
 export const seedProgress = (): Record<string, Progress> =>
   Object.fromEntries(STUDENTS.map((s, i) => [s.id, i === 0 ? emptyProgress() : seeded(i)]))
-
-export const seedSteps = (): Record<string, string[]> => ({
-  p1: ['note', 'scenario', 'decoupage', 'tournage'],
-  p2: ['note', 'scenario'],
-  p3: ['note'],
-})

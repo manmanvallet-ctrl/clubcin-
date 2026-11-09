@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import type { Level } from './data/content'
-import { emptyProgress, seedProgress, seedSteps, type Progress } from './data/demo'
+import { carnetId, emptyCarnet, seedCarnets, type Carnet } from './data/ateliers'
+import { emptyProgress, seedProgress, type Progress } from './data/demo'
 
 // Prototype : tout l'état vit dans le navigateur (localStorage), sans serveur.
 export type Session = { role: 'eleve'; studentId: string } | { role: 'enseignant' } | null
@@ -9,7 +10,7 @@ interface State {
   session: Session
   level: Level
   progress: Record<string, Progress>
-  steps: Record<string, string[]>
+  carnets: Record<string, Carnet> // clé : atelier--groupe
 }
 
 interface Store extends State {
@@ -17,13 +18,14 @@ interface Store extends State {
   setLevel: (l: Level) => void
   toggle: (kind: 'periods' | 'terms' | 'directors', id: string) => void
   saveQuiz: (level: Level, score: number) => void
-  toggleStep: (projectId: string, stepId: string) => void
+  lancer: (atelierId: string, groupId: string) => string
+  updateCarnet: (id: string, patch: Partial<Carnet>) => void
   reset: () => void
   me: Progress
 }
 
-const KEY = 'clubcine-proto-v1'
-const initial = (): State => ({ session: null, level: 1, progress: seedProgress(), steps: seedSteps() })
+const KEY = 'clubcine-proto-v2'
+const initial = (): State => ({ session: null, level: 1, progress: seedProgress(), carnets: seedCarnets() })
 
 function load(): State {
   try {
@@ -64,8 +66,13 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     toggle: (kind, id) => updateMe((p) => ({ ...p, [kind]: flip(p[kind], id) })),
     saveQuiz: (level, score) =>
       updateMe((p) => ({ ...p, quiz: { ...p.quiz, [level]: Math.max(score, p.quiz[level] ?? 0) } })),
-    toggleStep: (projectId, stepId) =>
-      setState((s) => ({ ...s, steps: { ...s.steps, [projectId]: flip(s.steps[projectId] ?? [], stepId) } })),
+    lancer: (atelierId, groupId) => {
+      const id = carnetId(atelierId, groupId)
+      setState((s) => (s.carnets[id] ? s : { ...s, carnets: { ...s.carnets, [id]: emptyCarnet() } }))
+      return id
+    },
+    updateCarnet: (id, patch) =>
+      setState((s) => ({ ...s, carnets: { ...s.carnets, [id]: { ...(s.carnets[id] ?? emptyCarnet()), ...patch } } })),
     reset: () => setState(initial()),
   }
   return <Ctx.Provider value={store}>{children}</Ctx.Provider>
