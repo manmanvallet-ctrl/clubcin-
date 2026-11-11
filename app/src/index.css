@@ -210,3 +210,12 @@ button.link.ok { color: var(--ok); }
 .badge { display: inline-grid; place-items: center; min-width: 20px; height: 20px; margin-left: 6px; padding: 0 6px; border-radius: 99px; background: var(--accent-fill); color: var(--accent-ink); font-size: 0.75rem; font-variant-numeric: tabular-nums; }
 .propositions { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; max-width: 720px; }
 .propositions a { overflow-wrap: anywhere; }
+
+/* ── Vidéothèque par thème ── */
+.theme { scroll-margin-top: 120px; }
+.theme .row { margin-bottom: 0; }
+.theme h2 { margin: 0; font-size: 1.2rem; }
+.theme .illus { margin-bottom: 0; font-size: 0.95rem; }
+.theme .illus-liens { gap: 8px; }
+nav.chips a.button { border-radius: 99px; padding: 5px 12px; font-size: 0.9rem; color: var(--text); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

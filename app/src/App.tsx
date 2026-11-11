@@ -6,6 +6,7 @@ import { AccueilEleve, Ateliers, Carnets } from './pages/Ateliers'
 import { CarnetPage } from './pages/Carnet'
 import { CultureAccueil, Histoire, Quiz, Realisateurs, Vocabulaire } from './pages/Eleve'
 import { Suivi } from './pages/Enseignant'
+import { Extraits } from './pages/Extraits'
 import { Propositions, enAttente } from './pages/Propositions'
 
 function Login() {
@@ -49,6 +50,7 @@ function Login() {
 function Culture() {
   const { session, level, setLevel } = useStore()
   const tabs = [
+    ['extraits', 'Extraits'],
     ['histoire', 'Histoire'],
     ['vocabulaire', 'Vocabulaire'],
     ['realisateurs', 'Cinéastes'],
@@ -139,7 +141,8 @@ export default function App() {
           <Route path="/carnets" element={eleve ? <Navigate to="/" /> : <Carnets />} />
           <Route path="/carnet/:id" element={<CarnetPage />} />
           <Route path="/culture" element={<Culture />}>
-            <Route index element={eleve ? <CultureAccueil /> : <Navigate to="/culture/histoire" replace />} />
+            <Route index element={eleve ? <CultureAccueil /> : <Navigate to="/culture/extraits" replace />} />
+            <Route path="extraits" element={<Extraits />} />
             <Route path="histoire" element={<Histoire />} />
             <Route path="vocabulaire" element={<Vocabulaire />} />
             <Route path="realisateurs" element={<Realisateurs />} />

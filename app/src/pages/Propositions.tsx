@@ -1,6 +1,7 @@
 import { auteur } from '../components/Illustrations'
 import { ATELIERS } from '../data/ateliers'
 import { DIRECTORS, PERIODS, TERMS } from '../data/content'
+import { THEMES } from '../data/extraits'
 import type { Media } from '../data/medias'
 import { useStore } from '../store'
 
@@ -10,6 +11,7 @@ function libelle(cle: string) {
   if (type === 'term') return `Vocabulaire · ${TERMS.find((t) => t.id === id)?.term ?? id}`
   if (type === 'period') return `Histoire · ${PERIODS.find((p) => p.id === id)?.title ?? id}`
   if (type === 'director') return `Cinéastes · ${DIRECTORS.find((d) => d.id === id)?.name ?? id}`
+  if (type === 'theme') return `Extraits · ${THEMES.find((t) => t.id === id)?.title ?? id}`
   return `Atelier · ${ATELIERS.find((a) => a.id === id)?.title ?? id}`
 }
 

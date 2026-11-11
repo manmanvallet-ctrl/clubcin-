@@ -1,5 +1,7 @@
+import { RENVOIS, THEMES } from './extraits'
+
 // Illustrations attachées aux contenus : liens vers des extraits ou des cours, et images.
-// Clé : « term:plan », « period:muet », « director:varda », « atelier:hors-champ ».
+// Clé : « term:plan », « period:muet », « director:varda », « atelier:hors-champ », « theme:montage ».
 
 export interface Media {
   id: string
@@ -57,16 +59,27 @@ export function seedMedias(): Record<string, Media[]> {
       [{ id: `upopi-${id}`, kind: 'lien', title: `Cours Upopi : ${title}`, url: UPOPI + path, status: 'valide' } satisfies Media],
     ]),
   )
+  // La sélection de l'enseignant : rangée par thème, et reprise sous les contenus qu'elle illustre.
+  const push = (key: string, m: Media) => (medias[key] ??= []).push(m)
+  for (const t of THEMES) {
+    t.extraits.forEach((e, i) => push(`theme:${t.id}`, { id: `nb-${t.id}-${i}`, kind: 'lien', status: 'valide', ...e }))
+  }
+  for (const [key, refs] of Object.entries(RENVOIS)) {
+    for (const [themeId, i] of refs) {
+      const e = THEMES.find((t) => t.id === themeId)?.extraits[i]
+      if (e) push(key, { id: `nb-${themeId}-${i}@${key}`, kind: 'lien', status: 'valide', ...e })
+    }
+  }
   // Exemples de propositions d'élèves en attente, pour la démonstration.
-  medias['term:travelling'].push({
+  push('term:travelling', {
     id: 'demo-p1', kind: 'lien', status: 'propose', by: 's2',
     title: 'Les couloirs de l’hôtel dans Shining',
     url: rechercheYoutube('Shining travelling couloir tricycle'),
   })
-  medias['director:varda'] = [{
+  push('director:varda', {
     id: 'demo-p2', kind: 'lien', status: 'propose', by: 's8',
     title: 'Varda filme sa main dans Les Glaneurs et la Glaneuse',
     url: rechercheYoutube('Les Glaneurs et la Glaneuse Varda main camion'),
-  }]
+  })
   return medias
 }
