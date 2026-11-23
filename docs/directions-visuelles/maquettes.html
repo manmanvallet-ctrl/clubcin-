@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Club Ciné — directions visuelles</title>
+<!-- Polices chargées depuis Google pour la maquette seulement. Dans l'appli, elles seront hébergées localement (pas d'envoi à Google : public mineur). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Libre+Franklin:wght@400;600;800&family=Anton&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Inter+Tight:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9e6e1; font-family: system-ui, sans-serif; color: #222; padding: 24px 16px; }
+  .wall { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; }
+  figure { margin: 0; }
+  figcaption { font-weight: 700; margin: 0 0 10px; font-size: 15px; }
+  figcaption small { display: block; font-weight: 400; color: #555; }
+  .phone { width: 390px; height: 844px; overflow: hidden; position: relative; border-radius: 28px; box-shadow: 0 10px 40px rgba(0,0,0,.18); }
+  .phone main { padding: 20px 18px; }
+  .steps { list-style: none; padding: 0; margin: 0; }
+
+  /* ───────────── A · PELLICULE ─────────────
+     Feuille de service et script papier : crème, encre brune, tampon rouge, bande perforée. */
+  .a { background: #f3ead8; color: #2b2118; font-family: 'Libre Franklin', sans-serif;
+       background-image: radial-gradient(rgba(60,40,20,.06) 1px, transparent 1px); background-size: 4px 4px; }
+  .a header { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 18px 10px; border-bottom: 2px dashed #2b2118; }
+  .a .brand { font-family: 'Courier Prime', monospace; font-weight: 700; font-size: 20px; letter-spacing: .02em; }
+  .a .brand b { background: #2b2118; color: #f3ead8; padding: 0 6px; }
+  .a nav { display: flex; gap: 6px; padding: 10px 18px; font-family: 'Courier Prime', monospace; font-size: 15px; }
+  .a nav a { color: #2b2118; text-decoration: none; padding: 10px 10px; min-height: 44px; }
+  .a nav a.on { border: 2px solid #2b2118; }
+  .a .slate { font-family: 'Courier Prime', monospace; font-size: 13px; text-transform: uppercase; letter-spacing: .1em; }
+  .a h1 { font-family: 'Courier Prime', monospace; font-size: 34px; margin: 6px 0 4px; }
+  .a .lead { margin: 0 0 18px; }
+  .a .sheet { background: #fffaf0; border: 1.5px solid #2b2118; padding: 16px; position: relative; box-shadow: 4px 4px 0 #2b2118; }
+  .a .sheet h2 { font-family: 'Courier Prime', monospace; font-size: 22px; margin: 4px 0 14px; }
+  .a .film { display: grid; grid-template-columns: repeat(6, 1fr); background: #2b2118; padding: 10px 4px; gap: 4px; position: relative; }
+  .a .film::before, .a .film::after { content: ''; position: absolute; left: 4px; right: 4px; height: 5px;
+       background: repeating-linear-gradient(90deg, #f3ead8 0 6px, transparent 6px 12px); }
+  .a .film::before { top: 2px; } .a .film::after { bottom: 2px; }
+  .a .film li { background: #5a4a3a; color: #f3ead8; font-size: 10.5px; text-align: center; padding: 14px 1px; font-family: 'Courier Prime', monospace; }
+  .a .film li.ok { background: #f3ead8; color: #2b2118; font-weight: 700; }
+  .a .film li.now { background: #b3261e; color: #fff; font-weight: 700; }
+  .a .stamp { position: absolute; top: 10px; right: 12px; transform: rotate(8deg); border: 2.5px solid #b3261e; color: #b3261e;
+       font-family: 'Courier Prime', monospace; font-weight: 700; padding: 2px 8px; font-size: 14px; letter-spacing: .08em; }
+  .a .todo { margin-top: 14px; font-family: 'Courier Prime', monospace; }
+  .a .btn { display: block; width: 100%; margin-top: 14px; padding: 13px; min-height: 48px; background: #b3261e; color: #fff; border: 0;
+       font: 700 16px 'Courier Prime', monospace; text-transform: uppercase; letter-spacing: .08em; }
+  .a .more { margin-top: 22px; border-top: 2px dashed #2b2118; padding-top: 14px; font-size: 15px; }
+  .a .more a { color: #2b2118; }
+
+  /* ───────────── B · RISO ─────────────
+     Affiche de festival imprimée en risographie : deux encres (rose fluo + bleu), décalage, ombres franches. */
+  .b { background: #fbf7ee; color: #141414; font-family: 'Space Grotesk', sans-serif; }
+  .b header { display: flex; justify-content: space-between; align-items: center; padding: 16px 18px; }
+  .b .brand { font-family: 'Anton', sans-serif; font-size: 26px; text-transform: uppercase; letter-spacing: .01em;
+       color: #0057a0; text-shadow: 3px 2px 0 #ff48b0; }
+  .b .who { font-weight: 500; }
+  .b nav { display: flex; gap: 8px; padding: 0 18px 12px; }
+  .b nav a { color: #141414; text-decoration: none; border: 2px solid #141414; border-radius: 999px; padding: 9px 14px; font-weight: 500; min-height: 44px; }
+  .b nav a.on { background: #141414; color: #fbf7ee; }
+  .b h1 { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase; font-size: 64px; line-height: .92; margin: 10px 0 8px; position: relative; color: #141414; }
+  .b h1 span { color: #0057a0; position: relative; }
+  .b h1 span::after { content: 'Inès'; position: absolute; left: 4px; top: 3px; color: #ff48b0; mix-blend-mode: multiply; z-index: -1; }
+  .b .lead { font-size: 17px; margin: 0 0 18px; }
+  .b .card { background: #ff48b0; border: 2.5px solid #141414; border-radius: 16px; padding: 16px; box-shadow: 6px 6px 0 #141414; }
+  .b .row { display: flex; justify-content: space-between; font-weight: 700; text-transform: uppercase; font-size: 13px; letter-spacing: .06em; }
+  .b .card h2 { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase; font-size: 30px; line-height: 1; margin: 8px 0 14px; }
+  .b .steps { display: flex; flex-wrap: wrap; gap: 6px; }
+  .b .steps li { border: 2px solid #141414; border-radius: 999px; padding: 4px 10px; font-size: 13.5px; font-weight: 500; background: #fbf7ee; }
+  .b .steps li.ok { background: #141414; color: #fbf7ee; }
+  .b .steps li.now { background: #ffe14d; }
+  .b .btn { display: block; width: 100%; margin-top: 16px; padding: 13px; min-height: 48px; background: #0057a0; color: #fff; border: 2.5px solid #141414;
+       border-radius: 12px; font: 700 17px 'Space Grotesk', sans-serif; box-shadow: 3px 3px 0 #141414; }
+  .b .more { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 22px; }
+  .b .more a { display: block; border: 2.5px solid #141414; border-radius: 14px; padding: 14px; color: #141414; text-decoration: none; font-weight: 700; background: #fbf7ee; }
+  .b .more a:nth-child(2) { background: #cfe3f5; }
+  .b .burst { position: absolute; right: -40px; top: 120px; width: 130px; height: 130px; border-radius: 50%;
+       background: radial-gradient(#ff48b0 30%, transparent 31%) 0 0/10px 10px; opacity: .55; z-index: 0; }
+  .b main { position: relative; z-index: 1; }
+
+  /* ───────────── C · MONTAGE ─────────────
+     Logiciel de montage : pistes, timecode, tête de lecture. Sombre mais graphite + ambre, pas velours. */
+  .c { background: #121315; color: #eceae4; font-family: 'Inter Tight', sans-serif; }
+  .c header { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid #2a2c30; }
+  .c .brand { font-weight: 800; font-size: 18px; letter-spacing: -.01em; display: flex; align-items: center; gap: 8px; }
+  .c .rec { width: 10px; height: 10px; border-radius: 50%; background: #ff4d3d; box-shadow: 0 0 0 3px rgba(255,77,61,.25); }
+  .c .tc { font-family: 'JetBrains Mono', monospace; color: #ffc233; font-size: 14px; }
+  .c nav { display: flex; gap: 0; padding: 0 18px; border-bottom: 1px solid #2a2c30; }
+  .c nav a { color: #a3a6ad; text-decoration: none; padding: 13px 12px; font-weight: 600; min-height: 44px; border-bottom: 2px solid transparent; }
+  .c nav a.on { color: #eceae4; border-color: #ffc233; }
+  .c .lbl { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #a3a6ad; text-transform: uppercase; letter-spacing: .08em; }
+  .c h1 { font-size: 40px; font-weight: 800; letter-spacing: -.03em; margin: 6px 0 4px; }
+  .c .lead { color: #b9bbc1; margin: 0 0 18px; }
+  .c .panel { background: #1b1d20; border: 1px solid #2a2c30; border-radius: 10px; padding: 14px; }
+  .c .panel h2 { font-size: 21px; margin: 6px 0 14px; letter-spacing: -.01em; }
+  .c .track { position: relative; display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; padding-top: 18px; }
+  .c .track li { height: 46px; border-radius: 4px; background: #2a2c30; color: #a3a6ad; font-size: 10.5px; padding: 5px 4px; font-weight: 600; }
+  .c .track li.ok { background: #3b6d8f; color: #fff; }
+  .c .track li.now { background: #2a2c30; outline: 2px dashed #ffc233; outline-offset: -2px; color: #ffc233; }
+  .c .ruler { position: absolute; top: 0; left: 0; right: 0; height: 12px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: #6f737b;
+       background: repeating-linear-gradient(90deg, #3a3d42 0 1px, transparent 1px 10px) bottom/100% 5px no-repeat; }
+  .c .head { position: absolute; top: 0; bottom: -4px; left: 66.6%; width: 2px; background: #ffc233; }
+  .c .head::before { content: ''; position: absolute; top: 0; left: -5px; border: 6px solid transparent; border-top-color: #ffc233; }
+  .c .audio { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; margin-top: 3px; }
+  .c .audio li { height: 16px; border-radius: 3px; background: repeating-linear-gradient(90deg, #4f8a5e 0 2px, transparent 2px 4px); opacity: .9; }
+  .c .audio li.off { background: #2a2c30; }
+  .c .todo { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; }
+  .c .btn { padding: 12px 16px; min-height: 48px; background: #ffc233; color: #121315; border: 0; border-radius: 8px; font: 800 15px 'Inter Tight', sans-serif; }
+  .c .bins { margin-top: 18px; display: grid; gap: 8px; }
+  .c .bins a { display: flex; justify-content: space-between; padding: 14px; border: 1px solid #2a2c30; border-radius: 8px; color: #eceae4; text-decoration: none; font-weight: 600; }
+  .c .bins span { font-family: 'JetBrains Mono', monospace; color: #a3a6ad; font-weight: 400; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wall">
+
+  <figure>
+    <figcaption>A · Pellicule<small>Feuille de service, script tapé à la machine, tampons</small></figcaption>
+    <div class="phone a" id="a">
+      <header><span class="brand"><b>CLUB</b> CINÉ</span><span>Inès · <u>Quitter</u></span></header>
+      <nav><a class="on">Mon carnet</a><a>Ateliers</a><a>Culture</a></nav>
+      <main>
+        <div class="slate">Groupe Lumière — Prise 4</div>
+        <h1>Bonjour Inès.</h1>
+        <p class="lead">Reprenez votre carnet là où le groupe s’est arrêté.</p>
+        <section class="sheet">
+          <span class="stamp">EN COURS</span>
+          <div class="slate">Atelier · 4/6</div>
+          <h2>L’événement hors champ</h2>
+          <ol class="steps film">
+            <li class="ok">Idée</li><li class="ok">Cadre</li><li class="ok">Scéna&shy;rio</li><li class="ok">Story&shy;board</li><li class="now">Tour&shy;nage</li><li>Film</li>
+          </ol>
+          <p class="todo">INT. LYCÉE — JOUR<br>À faire : le tournage.</p>
+          <button class="btn">Ouvrir le carnet</button>
+        </section>
+        <p class="more"><a>Voir tous les ateliers</a> · <a>Culture ciné</a></p>
+      </main>
+    </div>
+  </figure>
+
+  <figure>
+    <figcaption>B · Riso<small>Affiche de festival imprimée en deux encres</small></figcaption>
+    <div class="phone b" id="b">
+      <div class="burst"></div>
+      <header><span class="brand">Club Ciné</span><span class="who">Inès · <u>Quitter</u></span></header>
+      <nav><a class="on">Mon carnet</a><a>Ateliers</a><a>Culture</a></nav>
+      <main>
+        <h1>Salut<br><span>Inès</span></h1>
+        <p class="lead">Groupe Lumière. Reprenez votre carnet là où le groupe s’est arrêté.</p>
+        <section class="card">
+          <div class="row"><span>Atelier</span><span>4 / 6</span></div>
+          <h2>L’événement hors champ</h2>
+          <ul class="steps">
+            <li class="ok">Idée ✓</li><li class="ok">Cadre ✓</li><li class="ok">Scénario ✓</li><li class="ok">Storyboard ✓</li><li class="now">Tournage →</li><li>Film</li>
+          </ul>
+          <button class="btn">On tourne !</button>
+        </section>
+        <div class="more"><a>Tous les ateliers →</a><a>Culture ciné →</a></div>
+      </main>
+    </div>
+  </figure>
+
+  <figure>
+    <figcaption>C · Montage<small>Table de montage : pistes, timecode, tête de lecture</small></figcaption>
+    <div class="phone c" id="c">
+      <header><span class="brand"><span class="rec"></span>Club Ciné</span><span class="tc">Inès</span></header>
+      <nav><a class="on">Mon carnet</a><a>Ateliers</a><a>Culture</a></nav>
+      <main>
+        <div class="lbl">Groupe Lumière</div>
+        <h1>Bonjour Inès</h1>
+        <p class="lead">Reprenez votre carnet là où le groupe s’est arrêté.</p>
+        <section class="panel">
+          <div class="lbl" style="display:flex;justify-content:space-between"><span>Atelier</span><span class="tc">04 / 06</span></div>
+          <h2>L’événement hors champ</h2>
+          <div class="track">
+            <div class="ruler"></div><div class="head"></div>
+          </div>
+          <ol class="steps track" style="padding-top:0">
+            <li class="ok">Idée</li><li class="ok">Cadre</li><li class="ok">Scénario</li><li class="ok">Story&shy;board</li><li class="now">Tour&shy;nage</li><li>Film</li>
+          </ol>
+          <ol class="steps audio"><li></li><li></li><li></li><li></li><li class="off"></li><li class="off"></li></ol>
+          <div class="todo"><span>À faire : <b>Tournage</b></span><button class="btn">Ouvrir ▸</button></div>
+        </section>
+        <div class="bins">
+          <a>Tous les ateliers <span>12 clips</span></a>
+          <a>Culture ciné <span>4 chutiers</span></a>
+        </div>
+      </main>
+    </div>
+  </figure>
+
+</div>
+</body>
+</html>
