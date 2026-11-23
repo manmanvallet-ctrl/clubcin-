@@ -21,3 +21,24 @@ L'écran d'accueil propose des profils de démonstration (élève ou enseignant�
 ## État
 
 Prototype de démonstration, sans serveur ni comptes réels. Le contenu pédagogique (`app/src/data/content.ts` et `app/src/data/ateliers.ts`) a été rédigé par IA et doit être relu par l'enseignant·e avant tout usage en classe.
+
+## À faire avant la mise en ligne
+
+Points tirés d'une checklist « 20 choses à vérifier avant de mettre un site en ligne » (23/11/2026), triés pour un outil utilisé par des **élèves mineurs**.
+
+**Avant tout usage en classe**
+- [ ] **Clés Supabase** : seule la clé `anon` (publishable) va dans l'appli. La clé `service_role` ne doit jamais être dans le front ni sur GitHub.
+- [ ] **Retester les règles d'accès (RLS)** (`supabase/tests/`) au moment de brancher le front sur la base.
+- [ ] **Page de confidentialité** (RGPD, mineurs) : quelles données, pourquoi, combien de temps, qui y accède. Garder la minimisation prévue dans `docs/discovery.md` (prénom ou pseudo, pas d'e-mail élève, codes de classe, hébergement UE).
+- [ ] **Mentions légales** (éditeur, hébergeur).
+- [ ] **Sauvegardes** : l'offre gratuite de Supabase n'a pas de sauvegarde automatique quotidienne. Prévoir un export régulier ou une offre payante.
+- [ ] **HTTPS** : automatique chez Supabase, Netlify ou Vercel ; Let's Encrypt sur un VPS.
+- [ ] **Responsive** (téléphones des élèves) et **contraste / accessibilité** (RGAA).
+
+**Utile**
+- [ ] Textes alternatifs (`alt`) sur les images de contenu (`Illustrations.tsx`).
+- [ ] Page 404 : avec React, une adresse inconnue peut donner un écran blanc.
+- [ ] CGU : règles de conduite (ce que les élèves peuvent déposer).
+- [x] Favicon (`app/public/favicon.svg`).
+
+**Volontairement écarté** : analytics et bandeau cookies (pas de mesure d'audience sur des mineurs), référencement de l'espace élèves (à ne pas indexer). Le SEO ne servira que pour une éventuelle page de présentation aux autres lycées.
