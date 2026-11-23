@@ -233,7 +233,7 @@ export function CarnetPage() {
               <span>Registre</span>
               <div className="chips">
                 {REGISTRES.map((r) => (
-                  <button key={r} className={carnet.registre === r ? 'active' : ''} onClick={() => set({ registre: carnet.registre === r ? '' : r })}>
+                  <button key={r} className={carnet.registre === r ? 'active' : ''} aria-pressed={carnet.registre === r} onClick={() => set({ registre: carnet.registre === r ? '' : r })}>
                     {r}
                   </button>
                 ))}

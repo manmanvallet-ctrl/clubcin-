@@ -53,11 +53,11 @@ export function Suivi() {
       </div>
 
       <div className="chips">
-        <button className={group === 'tous' ? 'active' : ''} onClick={() => setGroup('tous')}>
+        <button className={group === 'tous' ? 'active' : ''} aria-pressed={group === 'tous'} onClick={() => setGroup('tous')}>
           Tout le club
         </button>
         {GROUPS.map((g) => (
-          <button key={g.id} className={group === g.id ? 'active' : ''} onClick={() => setGroup(g.id)}>
+          <button key={g.id} className={group === g.id ? 'active' : ''} aria-pressed={group === g.id} onClick={() => setGroup(g.id)}>
             {g.name}
           </button>
         ))}

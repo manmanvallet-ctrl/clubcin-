@@ -156,7 +156,7 @@ export function Vocabulaire() {
         <input type="search" placeholder="Rechercher une notion…" value={q} onChange={(e) => setQ(e.target.value)} />
         <div className="chips">
           {cats.map((c) => (
-            <button key={c} className={c === cat ? 'active' : ''} onClick={() => setCat(c)}>
+            <button key={c} className={c === cat ? 'active' : ''} aria-pressed={c === cat} onClick={() => setCat(c)}>
               {c}
             </button>
           ))}
