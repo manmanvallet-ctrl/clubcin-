@@ -1,6 +1,6 @@
 # Directions visuelles — Club Ciné
 
-> **Direction retenue (24/11/2026) : la charte « programme de cinéma d'art et d'essai »** (`docs/charte/`), conçue par Manon. Papier crème, bandeau bordeaux, titres en Georgia, touches d'or, avec un thème sombre « Salle » pour la projection. Elle reprend le papier de la piste A, mais sur le ton d'un cinéma de quartier plutôt que d'une feuille de tournage.
+> **Direction retenue (24/11/2026) : la charte « programme de cinéma d'art et d'essai »** (`docs/charte/`), conçue par Manon. Papier crème, bandeau bordeaux, titres en Source Serif 4 (voir « Polices » plus bas), touches d'or, avec un thème sombre « Salle » pour la projection. Elle reprend le papier de la piste A, mais sur le ton d'un cinéma de quartier plutôt que d'une feuille de tournage.
 > Appliquée à l'appli : `avant-apres.png`, `salle.png`, `croquis-deux-themes.png`. Les trois pistes ci-dessous restent comme archive de la recherche.
 
 Essai du 23/11/2026 : trois directions vraiment différentes pour le même écran (accueil élève), à comparer avec l'interface actuelle.
