@@ -32,7 +32,7 @@ function Croquis({ value, onChange, label }: { value?: string; onChange: (v: str
     e.currentTarget.setPointerCapture(e.pointerId)
     drawing.current = true
     loaded.current = true
-    ctx.strokeStyle = '#f5efef'
+    ctx.strokeStyle = '#1f1416' // trait encre sur papier crème fixe (voir .croquis canvas)
     ctx.lineWidth = 3
     ctx.lineCap = 'round'
     ctx.lineJoin = 'round'

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { NavLink, Navigate, Outlet, Route, Routes, useNavigate } from 'react-router-dom'
 import { LEVELS, type Level } from './data/content'
 import { STUDENTS } from './data/demo'
@@ -87,6 +88,27 @@ function Culture() {
   )
 }
 
+// Crème pour l'écran et l'impression, Salle (sombre) pour projeter en salle obscure.
+function ThemeToggle() {
+  const [salle, setSalle] = useState(() => document.documentElement.dataset.theme === 'salle')
+  const toggle = () => {
+    const next = !salle
+    setSalle(next)
+    if (next) document.documentElement.dataset.theme = 'salle'
+    else delete document.documentElement.dataset.theme
+    try {
+      localStorage.setItem('clubcine-theme', next ? 'salle' : 'creme')
+    } catch {
+      /* stockage indisponible : le choix vaut pour cette visite */
+    }
+  }
+  return (
+    <button className="link" aria-pressed={salle} onClick={toggle}>
+      Mode salle
+    </button>
+  )
+}
+
 export default function App() {
   const { session, login, medias } = useStore()
   const navigate = useNavigate()
@@ -123,6 +145,7 @@ export default function App() {
         </nav>
         <div className="who">
           <span className="muted">{name}</span>
+          <ThemeToggle />
           <button
             className="link"
             onClick={() => {

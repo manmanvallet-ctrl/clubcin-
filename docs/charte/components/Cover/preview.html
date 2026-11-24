@@ -1,0 +1,50 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Club Ciné</title>
+<style>
+  html, body { margin:0; height:100%; }
+  body { background:var(--bg); color:var(--text); font-family:var(--font-sans); overflow:hidden; }
+  .cover { position:relative; height:288px; overflow:hidden; }
+  .art { position:absolute; top:0; left:480px; width:480px; height:288px; overflow:hidden; }
+  .art svg { display:block; width:480px; height:288px; }
+  .slab { fill:var(--band); rx:var(--radius-sm); }
+  .hole { fill:var(--bg); rx:var(--radius-sm); }
+  .poster { fill:var(--accent-fill); rx:var(--radius-md); }
+  .gold { fill:var(--gold); rx:var(--radius-lg); }
+  .rule { stroke:var(--line); stroke-width:1; }
+  [data-theme="salle"] .slab { fill:var(--accent-fill); }
+  [data-theme="salle"] .poster { fill:var(--accent); }
+  .words { position:absolute; left:var(--space-5); bottom:var(--space-5); max-width:440px; }
+  .name { margin:0; font-family:var(--font-display); font-weight:400; font-size:88px; line-height:.95; letter-spacing:-.01em; color:var(--text); }
+  .tag { margin:var(--space-2) 0 0 4px; font-size:14px; line-height:20px; color:var(--muted); }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 480 288" width="480" height="288">
+<!--
+  blocks      band 176×304 bleeding top and bottom (the velvet bandeau, largest) · accent-fill 112×168 (a 2:3 film poster) · gold 112×40 once — ≈30% of 960×288; in the salle theme the slab binds to accent-fill and the poster to accent, since band sits within a few percent of that ground
+  arrangement one tall slab with satellites: poster beside it, gold block under the poster, three programme rules to the right, space-5 gutters
+  pattern     literal motif from the README's "programme de cinéma" and 2:3 poster rule: film perforations 16×20 at a 32px pitch cut into the slab in bg (18 units), plus three line-token hairlines like the séance rows
+  scales      gutters space-5 (24) · inner offsets space-3 (12) · corners radius-sm (slab, perforations), radius-md (poster), radius-lg (gold)
+-->
+<rect class="slab" x="16" y="-8" width="176" height="304" rx="6"/>
+<rect class="hole" x="28" y="8" width="16" height="20" rx="6"/><rect class="hole" x="28" y="40" width="16" height="20" rx="6"/><rect class="hole" x="28" y="72" width="16" height="20" rx="6"/><rect class="hole" x="28" y="104" width="16" height="20" rx="6"/><rect class="hole" x="28" y="136" width="16" height="20" rx="6"/><rect class="hole" x="28" y="168" width="16" height="20" rx="6"/><rect class="hole" x="28" y="200" width="16" height="20" rx="6"/><rect class="hole" x="28" y="232" width="16" height="20" rx="6"/><rect class="hole" x="28" y="264" width="16" height="20" rx="6"/><rect class="hole" x="164" y="8" width="16" height="20" rx="6"/><rect class="hole" x="164" y="40" width="16" height="20" rx="6"/><rect class="hole" x="164" y="72" width="16" height="20" rx="6"/><rect class="hole" x="164" y="104" width="16" height="20" rx="6"/><rect class="hole" x="164" y="136" width="16" height="20" rx="6"/><rect class="hole" x="164" y="168" width="16" height="20" rx="6"/><rect class="hole" x="164" y="200" width="16" height="20" rx="6"/><rect class="hole" x="164" y="232" width="16" height="20" rx="6"/><rect class="hole" x="164" y="264" width="16" height="20" rx="6"/>
+<rect class="poster" x="216" y="40" width="112" height="168" rx="8"/>
+<rect class="gold" x="216" y="224" width="112" height="40" rx="14"/>
+<line class="rule" x1="352" y1="88" x2="480" y2="88"/>
+<line class="rule" x1="352" y1="136" x2="480" y2="136"/>
+<line class="rule" x1="352" y1="184" x2="480" y2="184"/>
+</svg>
+</div>
+<div class="words">
+<h1 class="name">Club Ciné</h1>
+<p class="tag">Le programme du club cinéma, au lycée.</p>
+</div>
+</div>
+</body>
+</html>

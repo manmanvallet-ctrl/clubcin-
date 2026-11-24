@@ -1,5 +1,8 @@
 # Directions visuelles — Club Ciné
 
+> **Direction retenue (24/11/2026) : la charte « programme de cinéma d'art et d'essai »** (`docs/charte/`), conçue par Manon. Papier crème, bandeau bordeaux, titres en Georgia, touches d'or, avec un thème sombre « Salle » pour la projection. Elle reprend le papier de la piste A, mais sur le ton d'un cinéma de quartier plutôt que d'une feuille de tournage.
+> Appliquée à l'appli : `avant-apres.png`, `salle.png`, `croquis-deux-themes.png`. Les trois pistes ci-dessous restent comme archive de la recherche.
+
 Essai du 23/11/2026 : trois directions vraiment différentes pour le même écran (accueil élève), à comparer avec l'interface actuelle.
 
 - `actuel.png` : l'interface actuelle (rouge velours sur noir).
@@ -23,7 +26,8 @@ Toutes les paires texte / fond dépassent un contraste de 4,5 ; boutons et ongle
 - Tendances 2026 : typographie surdimensionnée, textures tactiles en réaction à l'uniformité des interfaces générées par IA ([Bubble](https://bubble.io/blog/web-design-trends/), [Figma](https://www.figma.com/resource-library/web-design-trends/)).
 - Le métier lui-même : le format des scénarios (Courier, « INT. LYCÉE — JOUR »), la pellicule perforée, les pistes et le timecode des logiciels de montage.
 
-## À faire une fois la direction choisie
+## Reste à faire
 
 - Héberger les polices dans l'appli (pas de Google Fonts : public mineur, RGPD).
-- Noter la direction retenue ici et dans `CLAUDE.md`, puis l'appliquer à `app/src/index.css` sur une branche, avec captures avant / après.
+- Choisir des polices hébergées dans l'appli : Georgia et Avenir n'existent ni sur Android ni sur Chromebook.
+- Trancher le nom : « Club Ciné » ou « Ciné-club ».
