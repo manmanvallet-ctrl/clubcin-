@@ -1,17 +1,67 @@
-:root {
-  /* Rouge et noir : salle obscure, rideau de velours. Un seul thème, sombre par choix. */
-  --bg: #0b0909;
-  --surface: #171213;
-  --line: #322628;
-  --text: #f5efef;
-  --muted: #ab9c9e;
-  --accent: #ff5c6a; /* rouge lisible en texte sur fond noir */
-  --accent-fill: #c8102e; /* rouge velours pour les aplats */
-  --accent-ink: #fff;
+/* Polices libres (licence OFL) hébergées dans l'appli : aucun appel à Google, public mineur.
+   Polices variables (un seul fichier pour toutes les graisses), jeu « latin » : accents français, œ, €. */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url('./assets/fonts/source-serif-4-latin-wght-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 200 1000;
+  font-display: swap;
+  src: url('./assets/fonts/nunito-sans-latin-wght-normal.woff2') format('woff2');
+}
+
+/* Charte « programme de cinéma d'art et d'essai » (docs/charte/) : papier crème, bordeaux de fauteuil, touches d'or.
+   Deux thèmes : Crème (par défaut) et Salle (sombre, pour projeter en salle obscure). */
+:root, [data-theme='creme'] {
+  --bg: #f3eae0;
+  --surface: #fbf6ef;
+  --line: #d6a39c; /* filets décoratifs, jamais pour du texte */
+  --text: #1f1416;
+  --muted: #6b5a5c;
+  --accent: #9e2b33; /* bordeaux « texte » : intitulés, liens, focus */
+  --accent-fill: #7a1b24; /* bordeaux en aplat : bouton principal, étape faite, progression */
+  --accent-ink: #f3eae0; /* texte posé sur accent-fill */
+  --accent-soft: #f6e6e2; /* fond rosé des tags */
+  --accent-soft-ink: #4a0f16;
+  --band: #4a0f16; /* bandeau bordeaux profond : la signature */
+  --band-ink: #f3eae0;
+  --band-muted: #d6a39c;
+  --gold: #c2a15e; /* décoratif seulement : jamais seul pour porter une info */
+  --gold-text: #7a5c1e;
+  --ok: #276b3e;
+  --ko: #9a5400; /* orange, pour ne pas se confondre avec le bordeaux */
+  color-scheme: light;
+}
+[data-theme='salle'] {
+  --bg: #140b0c;
+  --surface: #1f1314;
+  --line: #3d2427;
+  --text: #f3eae0;
+  --muted: #b8a3a0;
+  --accent: #e8968f;
+  --accent-fill: #b3363f;
+  --accent-ink: #f3eae0;
+  --accent-soft: #3a1a1d;
+  --accent-soft-ink: #f3eae0;
+  --gold-text: #d4b87a;
   --ok: #6fcf8e;
   --ko: #ffb347;
   color-scheme: dark;
-  font-family: 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+}
+:root {
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+  --font-display: 'Source Serif 4', Georgia, 'Times New Roman', serif; /* choix du 24/11 : Georgia manque sur Android et Chromebook */
+  --font-sans: 'Nunito Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Courier New', Courier, monospace;
+  font-family: var(--font-sans);
   color: var(--text);
   background: var(--bg);
   line-height: 1.55;
@@ -19,7 +69,7 @@
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--text); font-size: 16px; }
 main { max-width: 1080px; margin: 0 auto; padding-block: 24px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-h1, h2, h3 { font-family: Georgia, 'Times New Roman', serif; line-height: 1.2; margin: 0 0 8px; text-wrap: balance; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.2; margin: 0 0 8px; text-wrap: balance; }
 h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
 h2 { font-size: 1.2rem; }
 h3 { font-size: 0.8rem; font-family: inherit; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-top: 16px; }
@@ -28,21 +78,27 @@ a { color: var(--accent); }
 .lead { color: var(--muted); max-width: 62ch; margin-bottom: 24px; }
 .muted { color: var(--muted); }
 .small { font-size: 0.85rem; margin-top: 12px; }
-.eyebrow { text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.75rem; color: var(--accent); }
+/* Intitulé de section : bordeaux, casse de phrase (la charte remplace les petites capitales). */
+.eyebrow { font-size: 0.875rem; font-weight: 500; color: var(--accent); }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 
-.top { border-top: 3px solid var(--accent-fill); display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; padding-block: 12px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); border-bottom: 1px solid var(--line); position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 2; }
-.brand { font-family: Georgia, serif; font-size: 1.15rem; color: var(--accent); }
+.top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; padding-block: 12px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); position: sticky; top: env(safe-area-inset-top, 0px); background: var(--band); color: var(--band-ink); z-index: 2; }
+.brand { font-family: var(--font-display); font-size: 1.3rem; color: var(--band-ink); }
 .top nav { display: flex; gap: 4px; overflow-x: auto; flex: 1; min-width: 0; }
-.top nav a { color: var(--muted); text-decoration: none; padding: 6px 10px; border-radius: 999px; white-space: nowrap; }
-.top nav a.active { color: var(--text); background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+.top nav a { color: var(--band-muted); text-decoration: none; padding: 6px 10px; border-radius: 999px; white-space: nowrap; }
+.top nav a:hover { color: var(--band-ink); }
+.top nav a.active { color: var(--band); background: var(--band-ink); }
+.top .who, .top .who .muted, .top button.link { color: var(--band-muted); }
+.top button.link:hover { color: var(--band-ink); }
+.top a:focus-visible, .top button:focus-visible { outline-color: var(--band-ink); }
+.top .badge { background: var(--band-ink); color: var(--band); }
 .who { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; min-width: 0; }
 .top nav { flex-basis: 100%; order: 3; }
 @media (min-width: 900px) { .top nav { flex-basis: 0; order: 0; } }
 .brand { margin-right: auto; }
 @media (min-width: 900px) { .brand { margin-right: 0; } }
 
-button, select, input, textarea, a.button, label.button { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 7px 12px; }
+button, select, input, textarea, a.button, label.button { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 7px 12px; }
 button { cursor: pointer; }
 button:hover:not(:disabled) { border-color: var(--accent); }
 button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -57,13 +113,13 @@ button.done { color: var(--ok); border-color: var(--ok); }
 .card.tile { text-decoration: none; color: inherit; display: block; }
 .card.tile:hover { border-color: var(--accent); }
 .row { display: flex; justify-content: space-between; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 0.85rem; margin-bottom: 8px; }
-.big { font-family: Georgia, serif; font-size: 2.2rem; font-variant-numeric: tabular-nums; }
+.big { font-family: var(--font-display); font-size: 2.2rem; font-variant-numeric: tabular-nums; }
 
 .bar { height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; margin: 8px 0; min-width: 60px; }
 .bar span { display: block; height: 100%; background: var(--accent-fill); border-radius: 99px; }
 
-.tag { font-size: 0.72rem; padding: 2px 8px; border-radius: 99px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
-.tag.l3 { border-color: var(--accent); color: var(--accent); }
+.tag { font-size: 0.72rem; padding: 2px 8px; border-radius: var(--radius-sm); background: var(--accent-soft); color: var(--accent-soft-ink); white-space: nowrap; }
+.tag.l3 { background: var(--accent-fill); color: var(--accent-ink); }
 
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 16px; }
 .chips button, .chips span { border-radius: 99px; padding: 5px 12px; font-size: 0.9rem; }
@@ -82,7 +138,7 @@ ul.plain li:last-child { border: none; }
 .timeline > li.above .period { opacity: 0.65; }
 .period { width: 100%; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; text-align: left; padding: 12px 14px; }
 .period .years { color: var(--accent); font-variant-numeric: tabular-nums; min-width: 110px; }
-.period .ptitle { font-family: Georgia, serif; font-size: 1.1rem; flex: 1; min-width: 180px; }
+.period .ptitle { font-family: var(--font-display); font-size: 1.1rem; flex: 1; min-width: 180px; }
 .timeline .card { margin-top: 8px; }
 .timeline .card ul { margin: 0 0 12px; padding-left: 20px; }
 
@@ -110,7 +166,7 @@ tbody tr:last-child th, tbody tr:last-child td { border-bottom: none; }
 .login { max-width: 760px; padding-top: 12vh; }
 .login h1 { font-size: clamp(2.6rem, 8vw, 4.2rem); }
 
-body::before { content: ''; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+body::before { content: ''; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--band); }
 .who select { max-width: 11rem; }
 
 /* ── Ateliers et carnet de création ── */
@@ -147,7 +203,7 @@ a.button:hover { border-color: var(--accent); }
 .field small.ko { color: var(--ko); min-height: 0; }
 .field .chips { margin: 0; }
 textarea, input[type='url'] { width: 100%; background: var(--bg); resize: vertical; line-height: 1.5; }
-textarea.mono { font-family: 'Courier New', Courier, monospace; font-size: 0.95rem; }
+textarea.mono { font-family: var(--font-mono); font-size: 0.95rem; }
 textarea::placeholder, input::placeholder { color: var(--muted); opacity: 0.6; }
 .field select { width: 100%; background: var(--bg); }
 
@@ -165,9 +221,9 @@ textarea::placeholder, input::placeholder { color: var(--muted); opacity: 0.6; }
   .field small { min-height: 0; }
 }
 .croquis { position: relative; align-self: start; }
-.croquis canvas { display: block; width: 100%; aspect-ratio: 16 / 9; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; touch-action: none; cursor: crosshair; }
-.croquis-hint { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); opacity: 0.6; font-size: 0.85rem; pointer-events: none; }
-.croquis .link { position: absolute; right: 4px; bottom: 4px; font-size: 0.8rem; }
+.croquis canvas { display: block; width: 100%; aspect-ratio: 16 / 9; background: #fbf6ef; /* papier fixe : le trait reste visible dans les deux thèmes */ border: 1px solid var(--line); border-radius: 6px; touch-action: none; cursor: crosshair; }
+.croquis-hint { position: absolute; inset: 0; display: grid; place-items: center; color: #6b5a5c; font-size: 0.85rem; pointer-events: none; }
+.croquis .link { position: absolute; right: 4px; bottom: 4px; font-size: 0.8rem; color: #6b5a5c; }
 
 .steps label { align-items: flex-start; }
 .steps input { flex: none; margin-top: 3px; }
@@ -219,3 +275,9 @@ button.link.ok { color: var(--ok); }
 .theme .illus-liens { gap: 8px; }
 nav.chips a.button { border-radius: 99px; padding: 5px 12px; font-size: 0.9rem; color: var(--text); }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* ── Zones tactiles : 44 px minimum, la taille d'un doigt sur téléphone (choix du 24/11, plus strict que les 36 px de la charte) ── */
+button, select, a.button, label.button, label.upload, .top nav a, .subnav a, input:not([type='checkbox']):not([type='radio']) { min-height: 44px; }
+button, a.button, label.button, label.upload, .top nav a, .subnav a { display: inline-flex; align-items: center; }
+summary { padding-block: 10px; }
+.steps label { min-height: 44px; }

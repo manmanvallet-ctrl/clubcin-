@@ -1,0 +1,61 @@
+{
+  "manifestVersion": 3,
+  "name": "Club Ciné",
+  "namespace": "ClubCine",
+  "files": [
+    "components/Button/README.md",
+    "components/Card/README.md",
+    "components/FilmCard/README.md",
+    "components/Quiz/README.md",
+    "components/Stepper/README.md",
+    "components/Tag/README.md",
+    "components/Timeline/README.md",
+    "components/TopBar/README.md",
+    "components/bundle.css",
+    "tokens.css"
+  ],
+  "libraries": [],
+  "components": [
+    {
+      "name": "Button",
+      "group": "Actions",
+      "summary": "Un seul bouton principal (rouge rideau) par écran, pour l'action pour laquelle l'écran existe ; tous les autres sont neutres."
+    },
+    {
+      "name": "Card",
+      "group": "Contenu",
+      "summary": "Le conteneur de base : une notion, un atelier, un réalisateur, un indicateur."
+    },
+    {
+      "name": "FilmCard",
+      "group": "Contenu",
+      "summary": "La carte « Film de la semaine » : le film en cours au club, son activité et les prochaines séances."
+    },
+    {
+      "name": "Quiz",
+      "group": "Évaluation",
+      "summary": "Questions à choix multiple, une à la fois, 640px de large maximum."
+    },
+    {
+      "name": "Stepper",
+      "group": "Parcours",
+      "summary": "Le fil des ateliers (Scénario → Storyboard → Tournage → Montage)."
+    },
+    {
+      "name": "Tag",
+      "group": "Étiquettes",
+      "summary": "Les tags indiquent le type d'activité ou le niveau ; les chips servent de filtres."
+    },
+    {
+      "name": "Timeline",
+      "group": "Parcours",
+      "summary": "La colonne vertébrale du module Histoire du cinéma."
+    },
+    {
+      "name": "TopBar",
+      "group": "Navigation",
+      "summary": "Le bandeau en tête de chaque écran : un aplat band (bordeaux profond) avec la marque en Georgia et les rubriques."
+    }
+  ],
+  "assetGroups": []
+}

@@ -1,0 +1,150 @@
+/* Club Ciné — generated from tokens.json */
+:root, [data-theme="creme"] {
+  --bg: #f3eae0; /* Fond de page. Crème chaud par défaut ; brun très sombre en thème Salle pour la projection. */
+  --surface: #fbf6ef; /* Fond des cartes, champs et boutons neutres, posés sur bg. */
+  --line: #d6a39c; /* Filets 1px rosés : séparateurs de liste, bords de cartes. Décoratif (≈1,8:1), jamais pour du texte. */
+  --text: #1f1416; /* Texte courant et titres (≥15:1 sur bg et surface). */
+  --muted: #6b5a5c; /* Texte secondaire : réalisateur, durée, libellés, consignes (≥5,4:1). */
+  --accent: #9e2b33; /* Bordeaux « texte » : intitulés de section, lieux, liens, focus (≥6,2:1 sur bg et surface). */
+  --accent-fill: #7a1b24; /* Bordeaux en APLAT : bouton principal, chip active, étape faite, progression, affiche par défaut. Texte posé dessus = accent-ink. */
+  --accent-ink: #f3eae0; /* Texte et icônes sur accent-fill (8,8:1 crème ; 5:1 salle). */
+  --accent-soft: #f6e6e2; /* Fond rosé des tags (type d'activité : « Analyse de plan »). */
+  --accent-soft-ink: #4a0f16; /* Texte sur accent-soft (≥12:1). */
+  --band: #4a0f16; /* Bandeau bordeaux profond en tête de carte ou d'écran : la signature de la charte. */
+  --band-ink: #f3eae0; /* Titre sur le bandeau (12,9:1). */
+  --band-muted: #d6a39c; /* Sous-titre sur le bandeau (7:1). */
+  --gold: #c2a15e; /* Or décoratif : étoiles, pictos d'affiche, filets de prestige. Trop pâle sur crème (2:1) pour porter seul une info : toujours doublé d'un texte (« 4/5 »). */
+  --gold-text: #7a5c1e; /* Or lisible pour du texte (note, mention « Coup de cœur ») : ≥5,2:1. */
+  --ok: #276b3e; /* Bonne réponse, étape faite. Toujours avec ✓ ou un mot. */
+  --ko: #9a5400; /* Mauvaise réponse, champ à corriger. Orange, pour ne pas se confondre avec le bordeaux. Toujours avec ✗ ou un mot. */
+}
+[data-theme="salle"] {
+  --bg: #140b0c;
+  --surface: #1f1314;
+  --line: #3d2427;
+  --text: #f3eae0;
+  --muted: #b8a3a0;
+  --accent: #e8968f;
+  --accent-fill: #b3363f;
+  --accent-ink: #f3eae0;
+  --accent-soft: #3a1a1d;
+  --accent-soft-ink: #f3eae0;
+  --band: #4a0f16;
+  --band-ink: #f3eae0;
+  --band-muted: #d6a39c;
+  --gold: #c2a15e;
+  --gold-text: #d4b87a;
+  --ok: #6fcf8e;
+  --ko: #ffb347;
+}
+:root {
+  --space-1: 4px; /* Écart entre pastilles de navigation, padding des boutons-liens. */
+  --space-2: 8px; /* Écart entre chips, boutons, lignes d'une carte. */
+  --space-3: 12px; /* Padding horizontal des boutons, padding de bloc « plan ». */
+  --space-4: 16px; /* Gouttière des grilles de cartes, marge latérale mobile. */
+  --space-5: 24px; /* Marge haute de page, espace sous le chapeau. */
+  --space-8: 64px; /* Marge basse de page. */
+  --radius-sm: 6px; /* Tags, zone de croquis. */
+  --radius-md: 8px; /* Boutons, champs, affiches de film. */
+  --radius-lg: 14px; /* Cartes et écrans (coins du bandeau compris). */
+  --radius-pill: 999px; /* Chips de filtre, navigation, barres de progression, numéros d'étape. */
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-sans: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Courier New", Courier, monospace;
+  --text-titre-accueil: 400 67px/1.2 var(--font-display); /* Écran de connexion uniquement (4,2rem max, clamp 2,6–4,2rem). */
+  --text-h1: 700 42px/1.2 var(--font-display); /* Titre de page (clamp 1,8–2,6rem). Un seul par écran. */
+  --text-chiffre: 400 35px/1.2 var(--font-display); /* Gros chiffres de tableau de bord (2,2rem, chiffres tabulaires). */
+  --text-h2: 700 19px/1.2 var(--font-display); /* Titre de carte ou de section (1,2rem). */
+  --text-periode: 400 18px/1.3 var(--font-display); /* Titre d'une période dans la frise (1,1rem). */
+  --text-titre-film: 600 19px/1.3 var(--font-sans); /* Titre d'un film dans une carte. */
+  --text-corps: 400 16px/1.55 var(--font-sans); /* Texte courant, max 62–70 caractères par ligne. */
+  --text-petit: 400 14px/1.5 var(--font-sans); /* Méta, lignes de carte (.row), pager (0,85rem). */
+  --text-intitule: 500 14px/1.4 var(--font-sans); /* Intitulé de section, en bordeaux (accent), casse de phrase. Remplace l'ancien eyebrow en majuscules. */
+  --text-libelle: 400 13px/1.4 var(--font-sans); /* h3 et libellés de champ : MAJUSCULES, couleur muted (0,8rem). */
+  --text-tag: 400 11.5px/1.4 var(--font-sans); /* Étiquettes de niveau et pastilles (0,72rem). */
+  --text-scenario: 400 15px/1.5 var(--font-mono); /* Zones d'écriture de scénario (textarea.mono), façon machine à écrire. */
+}
+.titre-accueil {
+  font-family: var(--font-display);
+  font-size: 67px;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.h1 {
+  font-family: var(--font-display);
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.chiffre {
+  font-family: var(--font-display);
+  font-size: 35px;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.h2 {
+  font-family: var(--font-display);
+  font-size: 19px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.periode {
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.titre-film {
+  font-family: var(--font-sans);
+  font-size: 19px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.corps {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.petit {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.intitule {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.libelle {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+}
+.tag {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.scenario {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 0;
+}
