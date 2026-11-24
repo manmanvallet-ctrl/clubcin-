@@ -26,8 +26,10 @@ Toutes les paires texte / fond dépassent un contraste de 4,5 ; boutons et ongle
 - Tendances 2026 : typographie surdimensionnée, textures tactiles en réaction à l'uniformité des interfaces générées par IA ([Bubble](https://bubble.io/blog/web-design-trends/), [Figma](https://www.figma.com/resource-library/web-design-trends/)).
 - Le métier lui-même : le format des scénarios (Courier, « INT. LYCÉE — JOUR »), la pellicule perforée, les pistes et le timecode des logiciels de montage.
 
+## Polices (choix du 24/11/2026)
+
+Georgia et Avenir, prévues par la charte, n'existent ni sur Android ni sur Chromebook. Comparaison dans `polices.png` ; choix : **option 2, Source Serif 4 (titres) + Nunito Sans (texte)**, rendu dans `polices-choisies.png`. Les deux sont sous licence libre OFL et hébergées dans l'appli (`app/src/assets/fonts/`, environ 80 Ko) : aucun appel à Google.
+
 ## Reste à faire
 
-- Héberger les polices dans l'appli (pas de Google Fonts : public mineur, RGPD).
-- Choisir des polices hébergées dans l'appli : Georgia et Avenir n'existent ni sur Android ni sur Chromebook.
 - Trancher le nom : « Club Ciné » ou « Ciné-club ».
