@@ -281,3 +281,6 @@ button, select, a.button, label.button, label.upload, .top nav a, .subnav a, inp
 button, a.button, label.button, label.upload, .top nav a, .subnav a { display: inline-flex; align-items: center; }
 summary { padding-block: 10px; }
 .steps label { min-height: 44px; }
+
+/* ── Bandeau « maquette » de la démo en ligne ── */
+.demo { margin: 0; padding: 8px 16px; background: var(--accent-soft); color: var(--accent-soft-ink); font-size: 0.85rem; line-height: 1.45; text-align: center; border-bottom: 1px solid var(--line); }
