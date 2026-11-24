@@ -10,40 +10,53 @@ import { Suivi } from './pages/Enseignant'
 import { Extraits } from './pages/Extraits'
 import { Propositions, enAttente } from './pages/Propositions'
 
+// Version de démonstration en ligne : rappelle que rien n'est réel ni partagé.
+function DemoBanner() {
+  return (
+    <p className="demo" role="note">
+      <strong>Maquette de démonstration.</strong> Données fictives, enregistrées seulement dans ce navigateur. Ne saisis
+      pas de vraies informations (noms, photos d’élèves). Contenus rédigés par IA, en cours de relecture.
+    </p>
+  )
+}
+
 function Login() {
   const { login, reset } = useStore()
   return (
-    <main className="login">
-      <p className="eyebrow">Club cinéma · maquette</p>
-      <h1>Club Ciné</h1>
-      <p className="lead">
-        Des ateliers à contrainte et un carnet de création pour écrire, storyboarder et tourner en groupe. Choisissez un
-        profil de démonstration pour entrer.
-      </p>
-      <div className="grid two">
-        <section className="card">
-          <h2>Espace élève</h2>
-          <p className="muted">Retrouver le carnet de son groupe et avancer dans la création.</p>
-          <div className="chips">
-            {STUDENTS.filter((_, i) => i % 3 === 0).map((s) => (
-              <button key={s.id} onClick={() => login({ role: 'eleve', studentId: s.id })}>
-                {s.name}
-              </button>
-            ))}
-          </div>
-        </section>
-        <section className="card">
-          <h2>Espace enseignant</h2>
-          <p className="muted">Choisir un atelier, le lancer pour un groupe, suivre les carnets.</p>
-          <button className="primary" onClick={() => login({ role: 'enseignant' })}>
-            Entrer comme enseignant
-          </button>
-        </section>
-      </div>
-      <button className="link" onClick={reset}>
-        Réinitialiser les données de démonstration
-      </button>
-    </main>
+    <>
+      <DemoBanner />
+      <main className="login">
+        <p className="eyebrow">Club cinéma · maquette</p>
+        <h1>Club Ciné</h1>
+        <p className="lead">
+          Des ateliers à contrainte et un carnet de création pour écrire, storyboarder et tourner en groupe. Choisissez un
+          profil de démonstration pour entrer.
+        </p>
+        <div className="grid two">
+          <section className="card">
+            <h2>Espace élève</h2>
+            <p className="muted">Retrouver le carnet de son groupe et avancer dans la création.</p>
+            <div className="chips">
+              {STUDENTS.filter((_, i) => i % 3 === 0).map((s) => (
+                <button key={s.id} onClick={() => login({ role: 'eleve', studentId: s.id })}>
+                  {s.name}
+                </button>
+              ))}
+            </div>
+          </section>
+          <section className="card">
+            <h2>Espace enseignant</h2>
+            <p className="muted">Choisir un atelier, le lancer pour un groupe, suivre les carnets.</p>
+            <button className="primary" onClick={() => login({ role: 'enseignant' })}>
+              Entrer comme enseignant
+            </button>
+          </section>
+        </div>
+        <button className="link" onClick={reset}>
+          Réinitialiser les données de démonstration
+        </button>
+      </main>
+    </>
   )
 }
 
@@ -133,6 +146,7 @@ export default function App() {
 
   return (
     <>
+      <DemoBanner />
       <header className="top">
         <div className="brand">Club Ciné</div>
         <nav>

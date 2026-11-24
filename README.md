@@ -6,6 +6,10 @@ Outil pédagogique pour un club cinéma de lycée (et une future option cinéma-
 - [`app/`](app) — prototype navigable (React, TypeScript, Vite).
 - [`supabase/`](supabase) — schéma de la base, règles d'accès et corpus de départ pour le MVP.
 
+## Démo en ligne
+
+https://manmanvallet-ctrl.github.io/clubcin-/ — maquette publiée sur GitHub Pages à chaque push sur `main` (`.github/workflows/pages.yml`). Un bandeau rappelle que les données sont fictives, et la page demande aux moteurs de recherche de ne pas l'indexer (`noindex`). Ce n'est pas encore un outil à utiliser en classe : voir « À faire avant la mise en ligne ».
+
 ## Lancer le prototype
 
 ```bash
